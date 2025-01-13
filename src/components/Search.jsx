@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Search = ({queryChange, changeTitle, loading, searching, handleError, fetch}) => {
+// Uses passed in state manipulation to perform the same functionality as the data load in the main app component but with useRef to get the user input as the query for the API
+const Search = ({queryChange, changeTitle, loading, searching, fetch}) => {
   const query = useRef(null);
   let navigate = useNavigate();
 
@@ -18,7 +19,6 @@ const Search = ({queryChange, changeTitle, loading, searching, handleError, fetc
         queryChange(searchData.data.photos.photo)
       } catch (error) {
         console.log("Error fetching and parsing data", error);
-        handleError(error);
       } finally {
         loading(false)
         searching(false)

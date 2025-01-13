@@ -17,9 +17,9 @@ function App() {
   const [searchTitle, setSearchTitle] = useState("");
   const [searching, setSearching] = useState(false)
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(""); 
   let location = useLocation()
 
+  // Function used for initial data load of 3 default photo galleries
   useEffect(() => {
     async function getInitialPhotos() {
       setLoading(true);
@@ -28,11 +28,10 @@ function App() {
         setDogPhotos(dogData.data.photos.photo);
         const catData = await fetchData('cat')
         setCatPhotos(catData.data.photos.photo);
-        const compData = await fetchData('comp')
+        const compData = await fetchData('computers')
         setCompPhotos(compData.data.photos.photo);
       } catch (error) {
         console.log("Error fetching and parsing data", error);
-        setError(error);
       } finally {
         setLoading(false);
       }
@@ -42,6 +41,7 @@ function App() {
     
   }, []);
 
+  // Function used for photo gallery upon back and forward browser history change
   useEffect(() => {
     async function getSearchPhotos() {
       setLoading(true);
@@ -54,7 +54,6 @@ function App() {
         setSearchTitle(query)
       } catch (error) {
         console.log("Error fetching and parsing data", error);
-        setError(error);
       } finally {
         setLoading(false);
       }
@@ -65,12 +64,14 @@ function App() {
     }
   }, [location])
 
+  // Generic data fetch function from flickr 
   const fetchData = query => {
     const apiUrl = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`;
 
     return axios.get(`${apiUrl}`);
   }
 
+  // State management functions to pass to search component 
   const handleQueryChange = data => {
     setSearchPhotos(data);
   }
@@ -86,14 +87,10 @@ function App() {
   const handleSearching = isSearching => {
     setSearching(isSearching)
   }
-
-  const handleError = error => {
-    setError(error)
-  }
   
   return (
     <div className="container">
-      <Search queryChange={handleQueryChange} changeTitle={handleTitleChange} loading={handleLoading} searching={handleSearching} handleError={handleError} fetch={fetchData} />
+      <Search queryChange={handleQueryChange} changeTitle={handleTitleChange} loading={handleLoading} searching={handleSearching} fetch={fetchData} />
       <Nav />
       {loading ? (<p>Loading...</p>) : (
       <Routes>

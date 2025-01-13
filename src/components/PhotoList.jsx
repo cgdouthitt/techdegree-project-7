@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
-import React from "react";
+import { useEffect } from 'react'
 
 import Photo from "./Photo";
 import NoPhotos from "./NoPhotos";
 
+// Sets browser tab title an iterates over photo data or displays component for no photos 
 const PhotoList = ({data, title}) => {
   const results = data
   let photos;
