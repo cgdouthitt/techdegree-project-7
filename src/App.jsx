@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
-import apiKey from "./config.js";
 
 import Search from "./components/Search";
 import Nav from "./components/Nav";
