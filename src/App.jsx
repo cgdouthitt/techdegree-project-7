@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
+const apiKey = import.meta.env.VITE_API_KEY;
 
 import Search from "./components/Search";
 import Nav from "./components/Nav";
