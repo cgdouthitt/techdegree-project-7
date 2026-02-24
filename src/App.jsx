@@ -24,9 +24,9 @@ function App() {
     async function getInitialPhotos() {
       setLoading(true);
       try {
-        const dogData = await fetchData("dog");
+        const dogData = await fetchData("dogs");
         setDogPhotos(dogData.data.photos.photo);
-        const catData = await fetchData("cat");
+        const catData = await fetchData("cats");
         setCatPhotos(catData.data.photos.photo);
         const compData = await fetchData("computers");
         setCompPhotos(compData.data.photos.photo);
